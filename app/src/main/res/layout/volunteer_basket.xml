@@ -2,9 +2,29 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
 				android:layout_width="match_parent"
 				android:layout_height="match_parent"
+				android:padding="20dp"
 				android:layout_marginTop="?attr/actionBarSize">
-	<TextView android:layout_centerInParent="true" android:text="Volunteer" android:layout_width="match_parent"
-			  android:layout_height="match_parent"/>
+	<RelativeLayout android:id="@+id/qwer123" android:layout_width="match_parent" android:layout_height="wrap_content">
+		<TextView android:gravity="center" android:layout_width="match_parent"
+				  android:text="Basket"
+				  android:layout_marginVertical="20sp"
+				  android:textSize="30sp"
+				  android:textColor="@color/darkGrey"
+				  android:layout_height="wrap_content"/>
+	</RelativeLayout>
+	<RelativeLayout android:visibility="gone" android:layout_below="@+id/qwer123" android:layout_width="match_parent"
+					android:id="@+id/rel1"
+					android:layout_height="match_parent">
+		<TextView android:id="@+id/tcl" android:textSize="20sp" android:textColor="@color/darkGrey"
+				  android:layout_centerInParent="true"
+				  android:layout_width="wrap_content" android:text="Empty" android:layout_height="wrap_content"/>
+		<ListView android:id="@+id/listb" android:layout_width="match_parent" android:layout_height="wrap_content"/>
+	</RelativeLayout>
+	<RelativeLayout android:id="@+id/rel2" android:layout_width="match_parent" android:layout_height="match_parent">
+		<ProgressBar android:layout_centerInParent="true" android:layout_width="wrap_content"
+					 android:indeterminateTint="@color/orangeRed"
+					 android:layout_height="wrap_content"/>
+	</RelativeLayout>
 
 
 </RelativeLayout>

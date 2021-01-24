@@ -7,43 +7,74 @@
 			  android:id="@+id/wqewqe"
 			  android:textColor="@color/darkGrey"
 			  android:gravity="center"
-			  android:text="User Profile" android:layout_width="match_parent" android:layout_height="wrap_content"/>
+			  android:text="User Profile"
+			  android:layout_width="match_parent"
+			  android:layout_height="wrap_content"/>
 
-	<LinearLayout android:layout_marginVertical="10dp" android:layout_below="@+id/wqewqe" android:id="@+id/lProfile"
-				  android:layout_width="match_parent" android:layout_height="wrap_content">
+	<LinearLayout android:layout_marginVertical="10dp"
+				  android:layout_below="@+id/wqewqe"
+				  android:id="@+id/lProfile"
+				  android:layout_width="match_parent"
+				  android:layout_height="wrap_content">
 
 		<ImageView android:src="@drawable/user" android:layout_width="80dp"
 				   android:layout_height="80dp"/>
-		<LinearLayout android:paddingHorizontal="20dp" android:layout_gravity="center_vertical"
+		<LinearLayout android:paddingHorizontal="20dp"
+					  android:layout_gravity="center_vertical"
 					  android:orientation="vertical"
 					  android:layout_width="wrap_content"
 					  android:layout_height="wrap_content">
 			<TextView android:id="@+id/VolProfileFullName"
-					  android:textColor="@color/darkGrey" android:text="FullName"
+					  android:textColor="@color/darkGrey"
+					  android:text="FullName"
 					  android:layout_width="wrap_content"
 					  android:layout_height="wrap_content"/>
 			<TextView android:layout_marginVertical="10dp" android:id="@+id/VolProfileEmail"
 					  android:layout_width="wrap_content"
 					  android:textColor="@color/darkGrey"
-					  android:layout_height="wrap_content" android:text="Email"/>
-			<TextView android:textColor="@color/darkGrey" android:layout_width="wrap_content"
-					  android:layout_height="wrap_content" android:text="Volunteer"/>
+					  android:layout_height="wrap_content"
+					  android:text="Email"/>
+			<TextView android:textColor="@color/darkGrey"
+					  android:layout_width="wrap_content"
+					  android:layout_height="wrap_content"
+					  android:text="Volunteer"/>
 		</LinearLayout>
 	</LinearLayout>
 
 	<RelativeLayout android:paddingVertical="20dp" android:layout_below="@+id/lProfile"
 					android:layout_width="match_parent"
 					android:layout_height="match_parent">
-		<TextView android:textSize="20dp" android:id="@+id/commentH" android:paddingVertical="10dp"
-				  android:gravity="center"
-				  android:textColor="@color/darkGrey" android:layout_width="match_parent"
-				  android:layout_height="wrap_content"
-				  android:text="Comments"/>
-		<ListView android:layout_below="@+id/commentH" android:id="@+id/my_comments" android:layout_width="match_parent"
-				  android:layout_height="wrap_content"/>
+		<RelativeLayout android:visibility="gone"
+						android:id="@+id/Rvol_prog"
+						android:layout_width="match_parent"
+						android:layout_height="match_parent">
+			<TextView android:textSize="20dp"
+					  android:id="@+id/commentH"
+					  android:paddingVertical="10dp"
+					  android:gravity="center"
+					  android:textColor="@color/darkGrey"
+					  android:layout_width="match_parent"
+					  android:layout_height="wrap_content"
+					  android:text="Comments"/>
+			<ListView android:layout_below="@+id/commentH"
+					  android:id="@+id/my_comments"
+					  android:layout_width="match_parent"
+					  android:layout_height="wrap_content"/>
+			<TextView android:layout_centerInParent="true"
+					  android:id="@+id/ptv"
+					  android:layout_width="wrap_content"
+					  android:text="Empty"
+					  android:layout_height="wrap_content"/>
+
+		</RelativeLayout>
+
+
+		<ProgressBar android:id="@+id/vol_progs" android:layout_centerInParent="true"
+					 android:layout_width="wrap_content"
+					 android:indeterminateTint="@color/orangeRed"
+					 android:layout_height="wrap_content"/>
 
 
 	</RelativeLayout>
-
 
 </RelativeLayout>

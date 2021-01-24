@@ -19,7 +19,7 @@ import org.jetbrains.annotations.NotNull;
 
 public class RequesterActivity extends AppCompatActivity
     implements NavigationView.OnNavigationItemSelectedListener {
-  DatabaseHelper db;
+  private DatabaseHelper db;
   private NavigationView navigationView;
   private DrawerLayout drawerLayout;
   private FragmentManager fragmentManager;
@@ -65,12 +65,14 @@ public class RequesterActivity extends AppCompatActivity
       fragmentTransaction = fragmentManager.beginTransaction();
       fragmentTransaction.replace(R.id.container_frag, new RequesterFragment()).commit();
     }
+
+    /*
     if (item.getItemId() == R.id.reqProfile) {
       fragmentManager = getSupportFragmentManager();
       fragmentTransaction = fragmentManager.beginTransaction();
       fragmentTransaction.replace(R.id.container_frag, new RequesterProfile());
       fragmentTransaction.commit();
-    }
+    }*/
 
     if (item.getItemId() == R.id.reqBasket) {
       fragmentManager = getSupportFragmentManager();
@@ -79,9 +81,7 @@ public class RequesterActivity extends AppCompatActivity
       fragmentTransaction.commit();
     }
 
-    if (item.getItemId() == R.id.reqExitApp) {
-      System.exit(0);
-    }
+    if (item.getItemId() == R.id.reqExitApp) System.exit(0);
     return true;
   }
 }

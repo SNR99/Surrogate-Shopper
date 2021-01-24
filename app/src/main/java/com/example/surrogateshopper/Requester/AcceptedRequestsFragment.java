@@ -20,7 +20,6 @@ public class AcceptedRequestsFragment extends Fragment {
   private DatabaseHelper db;
   private AlertDialog.Builder dialogBuilder;
   private AlertDialog dialog;
-
   private ListView listView;
   private ArrayAdapter<String> adapter;
   private ArrayList<String> basketName, volID, basketID;

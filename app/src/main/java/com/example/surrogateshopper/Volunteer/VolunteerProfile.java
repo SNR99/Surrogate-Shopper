@@ -4,9 +4,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
-import android.widget.ListView;
-import android.widget.TextView;
+import android.widget.*;
 import androidx.fragment.app.Fragment;
 import com.example.surrogateshopper.DatabaseHelper;
 import com.example.surrogateshopper.PHPRequests;
@@ -26,6 +24,9 @@ public class VolunteerProfile extends Fragment {
   private ArrayAdapter<String> adapter;
   private ListView commentsListView;
   private String reqName, reqID;
+  private RelativeLayout rl;
+  private ProgressBar pb;
+  private TextView t;
 
   @Override
   public View onCreateView(
@@ -39,10 +40,15 @@ public class VolunteerProfile extends Fragment {
     name.setText(db.getFullName());
     email.setText(db.getEmail());
     commentArrayList = new ArrayList<>();
+    t = view.findViewById(R.id.ptv);
+
+    rl = view.findViewById(R.id.Rvol_prog);
+    pb = view.findViewById(R.id.vol_progs);
 
     adapter =
         new ArrayAdapter<>(getActivity(), android.R.layout.simple_list_item_1, commentArrayList);
     commentsListView.setAdapter(adapter);
+    commentsListView.setEmptyView(t);
 
     phpRequests.get_vol_comments(
             getActivity(),
@@ -55,6 +61,7 @@ public class VolunteerProfile extends Fragment {
   }
 
   private void processComments(String r) throws JSONException {
+    commentArrayList.clear();
     JSONObject jObj = new JSONObject(r);
     String sObj = jObj.getString("response");
     if (!sObj.equals("0")) {
@@ -66,6 +73,8 @@ public class VolunteerProfile extends Fragment {
         commentArrayList.add(comment);
       }
     }
+    rl.setVisibility(View.VISIBLE);
+    pb.setVisibility(View.GONE);
 
     adapter.notifyDataSetChanged();
   }

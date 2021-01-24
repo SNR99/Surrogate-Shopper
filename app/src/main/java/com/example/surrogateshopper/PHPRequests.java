@@ -3,6 +3,7 @@ package com.example.surrogateshopper;
 import android.app.Activity;
 import android.os.Build;
 import androidx.annotation.RequiresApi;
+import androidx.fragment.app.FragmentActivity;
 import okhttp3.*;
 import org.jetbrains.annotations.NotNull;
 import org.json.JSONException;
@@ -12,7 +13,7 @@ import java.util.ArrayList;
 import java.util.Objects;
 
 public class PHPRequests {
-  private final String baseUrl = "https://91a0348d5caa.ngrok.io/";
+  private final String baseUrl = "https://0cd7cabbcbfa.ngrok.io/";
   private final OkHttpClient client = new OkHttpClient();
 
   public void get_my_comments(Activity activity, String basket_id, RequestHandler r) {
@@ -392,6 +393,37 @@ public class PHPRequests {
   public void get_vol_comments(Activity activity, String user_id, RequestHandler r) {
     RequestBody user = new FormBody.Builder().add("user_id", user_id).build();
     final String loginUrl = baseUrl + "get_vol_comments.php";
+    Request loginRequest = new Request.Builder().url(loginUrl).post(user).build();
+
+    client
+        .newCall(loginRequest)
+        .enqueue(
+            new Callback() {
+              @Override
+              public void onResponse(@NotNull Call call, @NotNull Response response)
+                  throws IOException {
+                if (response.isSuccessful()) {
+
+                  String myRes = Objects.requireNonNull(response.body()).string();
+                  activity.runOnUiThread(
+                      () -> {
+                        try {
+                          r.processResponse(myRes);
+                        } catch (JSONException e) {
+                          e.printStackTrace();
+                        }
+                      });
+                }
+              }
+
+              @Override
+              public void onFailure(@NotNull Call call, @NotNull IOException e) {}
+            });
+  }
+
+  public void get_vol_basket(FragmentActivity activity, String user_id, RequestHandler r) {
+    RequestBody user = new FormBody.Builder().add("user_id", user_id).build();
+    final String loginUrl = baseUrl + "get_vol_basket.php";
     Request loginRequest = new Request.Builder().url(loginUrl).post(user).build();
 
     client
