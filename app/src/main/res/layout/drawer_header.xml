@@ -6,7 +6,7 @@
 			  android:layout_height="wrap_content"
 			  android:padding="30dp">
 
-	<LinearLayout android:gravity="bottom" android:id="@+id/linearLayout_header" android:orientation="vertical"
+	<LinearLayout android:gravity="bottom" android:orientation="vertical"
 				  android:layout_gravity="bottom"
 				  android:layout_width="wrap_content"
 				  android:layout_height="wrap_content">

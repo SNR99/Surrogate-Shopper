@@ -1,12 +1,11 @@
 package com.example.surrogateshopper.Requester;
 
+import android.app.AlertDialog;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
-import android.widget.ListView;
-import android.widget.TextView;
+import android.widget.*;
 import androidx.fragment.app.Fragment;
 import com.example.surrogateshopper.DatabaseHelper;
 import com.example.surrogateshopper.PHPRequests;
@@ -18,58 +17,94 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 
 public class AcceptedRequestsFragment extends Fragment {
-  private DatabaseHelper databaseHelper;
-  private PHPRequests phpRequests;
-  private TextView textView;
-  private ArrayAdapter<String> adapter;
-  private ArrayList<String> volID, basketID, basketName;
-  private ListView listView;
+  private DatabaseHelper db;
+  private AlertDialog.Builder dialogBuilder;
+  private AlertDialog dialog;
 
-  private Fragment commentFragment;
+  private ListView listView;
+  private ArrayAdapter<String> adapter;
+  private ArrayList<String> basketName, volID, basketID;
+  private PHPRequests phpRequests;
+  private RelativeLayout relativeLayout1, relativeLayout2;
 
   @Override
   public View onCreateView(
-      LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+          LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
     View view = inflater.inflate(R.layout.accepted_requests_fragment, container, false);
-    databaseHelper = new DatabaseHelper(getActivity());
-    phpRequests = new PHPRequests();
-    textView = view.findViewById(R.id.yrk);
-    listView = view.findViewById(R.id.accepted_list_view);
-    listView.setEmptyView(textView);
-    listView.setOnItemClickListener(
-        (parent, v, position, id) -> {
-          String vol_id = volID.get(position) + "";
-          String bas_id = basketID.get(position) + "";
-          Bundle bundle = new Bundle();
-          bundle.putString("vol_id", vol_id);
-          bundle.putString("bas_id", bas_id);
-          commentFragment = new CommentFragment();
-          commentFragment.setArguments(bundle);
-          getFragmentManager()
-              .beginTransaction()
-              .replace(R.id.container_frag, commentFragment)
-              .addToBackStack(null)
-              .commit();
-        });
+    final String msg = " volunteered to get you the basket of items you requested";
 
+    relativeLayout1 = view.findViewById(R.id.relativeLayoutOne);
+    relativeLayout2 = view.findViewById(R.id.relativeLayoutTwo);
+
+    db = new DatabaseHelper(getActivity());
+    phpRequests = new PHPRequests();
+
+    basketName = new ArrayList<>();
     volID = new ArrayList<>();
     basketID = new ArrayList<>();
-    basketName = new ArrayList<>();
+
+    listView = view.findViewById(R.id.accepted_list_view);
     adapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_list_item_1, basketName);
     listView.setAdapter(adapter);
-    String user_id = databaseHelper.getUserID();
-    phpRequests.accepted_requests(
-        getActivity(),
-        user_id,
-        r -> {
-          process(r);
+    listView.setEmptyView(view.findViewById(R.id.yrk));
+    listView.setOnItemClickListener(
+        (parent, view1, position, id) -> {
+          dialogBuilder = new AlertDialog.Builder(getActivity());
+          View v1 = getLayoutInflater().inflate(R.layout.comment, null);
+          RelativeLayout rl1;
+          RelativeLayout rl2;
+          rl1 = v1.findViewById(R.id.comment_main_xml);
+          rl2 = v1.findViewById(R.id.commentProgress);
+          Button ac = v1.findViewById(R.id.sendCommentBtn);
+          EditText Comment = v1.findViewById(R.id.edit_text_comment);
+          TextView h = v1.findViewById(R.id.volNameReg);
+          phpRequests.get_user(
+                  getActivity(),
+              volID.get(position),
+              w -> {
+                JSONObject jObj = new JSONObject(w);
+                String sObj = jObj.getString("response");
+                JSONObject j = new JSONObject(sObj);
+                String f = j.getString("first_name");
+                h.setText(f.substring(0, 1).toUpperCase() + f.substring(1) + msg);
+                rl1.setVisibility(View.VISIBLE);
+                rl2.setVisibility(View.GONE);
+              });
+
+          ac.setOnClickListener(
+              b1 -> {
+                String co = Comment.getText().toString();
+                if (!co.equals("")) phpRequests.add_comment(
+                        getActivity(),
+                        basketID.get(position),
+                        co,
+                        a -> {
+                            JSONObject jObj = new JSONObject(a);
+                            String sObj = jObj.getString("response");
+
+                            if (sObj.equals("1")) {
+                                Toast.makeText(getActivity(), "Comment added", Toast.LENGTH_SHORT).show();
+                                dialog.dismiss();
+
+                                dialog.dismiss();
+                            } else Toast.makeText(getActivity(), "Something went wrong", Toast.LENGTH_SHORT)
+                                    .show();
+                        });
+                else Toast.makeText(getActivity(), "Comment field Empty", Toast.LENGTH_LONG).show();
+              });
+
+          dialogBuilder.setView(v1);
+          dialog = dialogBuilder.create();
+          dialog.show();
         });
+
+    phpRequests.accepted_requests(getActivity(), db.getUserID(), this::processAccepted);
 
     return view;
   }
 
-  private void process(String response) throws JSONException {
-    JSONObject jObj = new JSONObject(response);
+  private void processAccepted(String r) throws JSONException {
+    JSONObject jObj = new JSONObject(r);
     String sObj = jObj.getString("response");
     if (!sObj.equals("0")) {
       JSONArray jsonArray = new JSONArray(sObj);
@@ -82,8 +117,10 @@ public class AcceptedRequestsFragment extends Fragment {
         volID.add(vol);
         basketID.add(basket_id);
         basketName.add(basket_name);
-        adapter.notifyDataSetChanged();
       }
     }
+    adapter.notifyDataSetChanged();
+    relativeLayout1.setVisibility(View.VISIBLE);
+    relativeLayout2.setVisibility(View.GONE);
   }
 }

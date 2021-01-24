@@ -34,10 +34,13 @@
 	<RelativeLayout android:paddingVertical="20dp" android:layout_below="@+id/lProfile"
 					android:layout_width="match_parent"
 					android:layout_height="match_parent">
-		<TextView android:textSize="20dp" android:paddingVertical="10dp" android:gravity="center"
+		<TextView android:textSize="20dp" android:id="@+id/commentH" android:paddingVertical="10dp"
+				  android:gravity="center"
 				  android:textColor="@color/darkGrey" android:layout_width="match_parent"
 				  android:layout_height="wrap_content"
 				  android:text="Comments"/>
+		<ListView android:layout_below="@+id/commentH" android:id="@+id/my_comments" android:layout_width="match_parent"
+				  android:layout_height="wrap_content"/>
 
 
 	</RelativeLayout>

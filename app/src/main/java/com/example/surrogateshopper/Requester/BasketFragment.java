@@ -31,7 +31,7 @@ public class BasketFragment extends Fragment {
 
   @Override
   public View onCreateView(
-      LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+          LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
     View view = inflater.inflate(R.layout.fragment_basket, container, false);
     phpRequests = new PHPRequests();
     DatabaseHelper databaseHelper = new DatabaseHelper(getActivity());
@@ -41,7 +41,6 @@ public class BasketFragment extends Fragment {
     FloatingActionButton saveFloatBtn = view.findViewById(R.id.floatingActionButtonSave);
     arrayList = new ArrayList<>();
     arrayQuantity = new ArrayList<>();
-    // adapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_list_item_1, arrayList);
     basketItemAdapter = new BasketItemAdapter(getActivity(), arrayList, arrayQuantity);
     itemList.setAdapter(basketItemAdapter);
     itemList.setEmptyView(itemEmpty);
@@ -53,20 +52,16 @@ public class BasketFragment extends Fragment {
         v1 -> {
           String basketName = basket_name.getText().toString();
 
-          if (arrayList.size() != 0 && !basketName.equals("")) {
-            phpRequests.add_basket(
-                getActivity(),
-                basketName,
-                user_id,
-                arrayList,
-                arrayQuantity,
-                response -> {
-                  processResponse(response);
-                });
-
-          } else {
-            Toast.makeText(getActivity(), "Your Basket is empty", Toast.LENGTH_SHORT).show();
-          }
+          if (arrayList.size() != 0 && !basketName.equals("")) phpRequests.add_basket(
+                  getActivity(),
+                  basketName,
+                  user_id,
+                  arrayList,
+                  arrayQuantity,
+                  response -> {
+                      processResponse(response);
+                  });
+          else Toast.makeText(getActivity(), "Your Basket is empty", Toast.LENGTH_SHORT).show();
         });
 
     return view;
@@ -81,15 +76,13 @@ public class BasketFragment extends Fragment {
       fragmentTransaction.replace(R.id.container_frag, new RequesterFragment());
       fragmentTransaction.commit();
 
-    } else {
-      Toast.makeText(getActivity(), "Something went wrong", Toast.LENGTH_SHORT).show();
-    }
+    } else Toast.makeText(getActivity(), "Something went wrong", Toast.LENGTH_SHORT).show();
   }
 
   private void showPopUp() {
 
     AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(getActivity());
-    final View contactPopupView = getLayoutInflater().inflate(R.layout.item_popup, null);
+    View contactPopupView = getLayoutInflater().inflate(R.layout.item_popup, null);
     Button addItemButton = contactPopupView.findViewById(R.id.add_item_btn);
     Button increaseBtn = contactPopupView.findViewById(R.id.increase);
     Button decreaseBtn = contactPopupView.findViewById(R.id.decrease);
@@ -127,11 +120,9 @@ public class BasketFragment extends Fragment {
             basketItemAdapter.notifyDataSetChanged();
 
             dialog.dismiss();
-          } else if (s.equals("")) {
-            Toast.makeText(getActivity(), "Empty", Toast.LENGTH_SHORT).show();
-          } else if (item_num.equals("0")) {
-            Toast.makeText(getActivity(), "How many do you want?", Toast.LENGTH_SHORT).show();
-          }
+          } else if (s.equals("")) Toast.makeText(getActivity(), "Empty", Toast.LENGTH_SHORT).show();
+          else if (item_num.equals("0"))
+              Toast.makeText(getActivity(), "How many do you want?", Toast.LENGTH_SHORT).show();
         });
   }
 }

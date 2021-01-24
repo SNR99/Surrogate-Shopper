@@ -3,43 +3,41 @@
 				android:layout_marginTop="?attr/actionBarSize"
 				android:layout_width="match_parent"
 				android:padding="20dp"
-				android:layout_height="match_parent">
+				android:layout_height="wrap_content">
 
-	<RelativeLayout android:layout_width="match_parent" android:layout_height="match_parent">
+	<RelativeLayout android:visibility="gone" android:id="@+id/ftb" android:layout_width="match_parent"
+					android:layout_height="wrap_content">
 		<RelativeLayout android:layout_marginVertical="5dp" android:id="@+id/taken_basket"
 						android:layout_width="match_parent"
 						android:layout_height="wrap_content">
 			<TextView android:layout_centerVertical="true"
 					  android:textColor="@color/darkGrey" android:textSize="30dp"
 					  android:id="@+id/profile_basket"
-					  android:layout_width="wrap_content" android:text="Basket Name"
+					  android:gravity="center"
+					  android:layout_marginBottom="10dp"
+					  android:layout_width="match_parent" android:text="Basket Name"
 					  android:layout_height="wrap_content"/>
-			<ImageButton android:layout_width="60dp" android:layout_height="60dp"
-						 android:background="@android:color/transparent"
-						 android:src="@drawable/ic_baseline_person_24" android:layout_alignParentRight="true"
 			/>
 
 		</RelativeLayout>
 
 		<RelativeLayout android:layout_below="@+id/taken_basket"
 						android:layout_width="match_parent"
-						android:layout_height="match_parent">
+						android:layout_height="wrap_content">
 			<ListView android:id="@+id/r" android:layout_width="wrap_content"
 					  android:layout_height="wrap_content"/>
 
-		</RelativeLayout>
 
-
-		<RelativeLayout android:layout_alignParentBottom="true" android:layout_width="wrap_content"
-						android:layout_height="wrap_content">
-			<Button android:id="@+id/acceptRequest" android:textColor="@android:color/white"
+			<Button android:layout_marginTop="30dp" android:layout_below="@+id/r" android:id="@+id/acceptRequest"
+					android:textColor="@android:color/white"
 					android:background="@drawable/rounded_button"
 					android:layout_width="match_parent" android:layout_height="wrap_content" android:text="accept"/>
 
 		</RelativeLayout>
 
 	</RelativeLayout>
-	<RelativeLayout android:id="@+id/pr" android:layout_width="match_parent" android:layout_height="match_parent">
+	<RelativeLayout android:paddingVertical="40dp" android:id="@+id/pr" android:layout_width="match_parent"
+					android:layout_height="wrap_content">
 		<ProgressBar android:layout_centerInParent="true" android:layout_width="wrap_content"
 					 android:layout_height="wrap_content" android:indeterminateTint="@color/orangeRed"
 		/>
