@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+				android:layout_width="match_parent"
+				android:padding="20dp"
+				android:layout_marginTop="?attr/actionBarSize"
+				android:layout_height="match_parent">
+	<TextView android:textSize="30sp" android:id="@+id/myBasketVol"
+			  android:layout_width="match_parent" android:textColor="@color/darkGrey"
+			  android:layout_height="wrap_content"/>
+
+
+	<Button android:textColor="@android:color/white" android:text="say thank you"
+			android:id="@+id/commentButton"
+			android:layout_alignParentBottom="true"
+			android:background="@drawable/rounded_button" android:layout_width="match_parent"
+			android:layout_height="wrap_content"/>
+
+
+</RelativeLayout>

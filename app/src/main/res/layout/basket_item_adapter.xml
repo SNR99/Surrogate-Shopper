@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+				android:orientation="horizontal"
+				android:layout_width="match_parent"
+				android:paddingVertical="10dp"
+				android:paddingHorizontal="20dp"
+				android:layout_height="match_parent">
+
+
+	<TextView android:textColor="@color/darkGrey"
+			  android:text="Basket name"
+			  android:textSize="18dp"
+
+			  android:layout_width="wrap_content"
+			  android:layout_height="wrap_content"
+			  android:id="@+id/item_name"/>
+	<TextView android:layout_width="wrap_content"
+			  android:text="Qty:"
+			  android:textSize="18dp"
+
+			  android:textColor="@color/darkGrey"
+			  android:id="@+id/item_quantity"
+			  android:layout_alignParentRight="true"
+			  android:layout_height="wrap_content"/>
+
+
+</RelativeLayout>

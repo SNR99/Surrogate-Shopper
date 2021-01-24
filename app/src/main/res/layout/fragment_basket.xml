@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+				xmlns:tools="http://schemas.android.com/tools"
+				android:layout_width="match_parent"
+				android:layout_height="match_parent" xmlns:app="http://schemas.android.com/apk/res-auto"
+				tools:context=".Requester.BasketFragment"
+				android:layout_marginTop="?attr/actionBarSize"
+>
+
+	<!-- TODO: Update blank fragment layout -->
+	<RelativeLayout android:id="@+id/headerBasket" android:paddingHorizontal="20dp" android:layout_width="match_parent"
+					android:layout_height="wrap_content">
+		<TextView android:id="@+id/basketHeader" android:layout_marginVertical="20dp"
+				  android:textColor="@color/darkGrey"
+				  android:textSize="30sp"
+				  android:gravity="center" android:layout_width="match_parent" android:layout_height="wrap_content"
+				  android:text="New Basket"/>
+		<EditText android:layout_below="@+id/basketHeader" android:layout_marginVertical="20dp"
+				  android:id="@+id/basketName" android:textColorHint="@color/darkGrey"
+				  android:layout_width="match_parent"
+				  android:hint="Basket Name"
+				  android:layout_height="wrap_content" android:autofillHints="My Basket"/>
+
+	</RelativeLayout>
+	<RelativeLayout android:layout_below="@+id/headerBasket"
+					android:layout_width="match_parent"
+					android:layout_height="match_parent">
+
+		<ListView android:padding="20dp" android:visibility="gone" android:id="@+id/itemList"
+				  android:layout_width="match_parent"
+				  android:layout_height="match_parent"/>
+		<TextView android:textColor="@color/darkGrey" android:layout_centerInParent="true"
+				  android:text="Empty"
+				  android:id="@+id/itemEmpty"
+				  android:layout_width="wrap_content"
+				  android:layout_height="wrap_content" android:textSize="20sp"/>
+
+
+	</RelativeLayout>
+
+
+	<RelativeLayout android:layout_alignParentBottom="true"
+					android:layout_width="match_parent"
+					android:padding="20dp"
+					android:layout_height="wrap_content" android:id="@+id/qwet">
+		<com.google.android.material.floatingactionbutton.FloatingActionButton
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:clickable="true"
+				android:elevation="0dp"
+				app:backgroundTint="@color/orangeRed"
+				app:srcCompat="@drawable/ic_baseline_done_244"
+				android:id="@+id/floatingActionButtonSave"/>
+
+		<com.google.android.material.floatingactionbutton.FloatingActionButton
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:clickable="true"
+				android:layout_alignParentRight="true"
+				android:layout_gravity="right"
+				android:elevation="0dp"
+				app:backgroundTint="@color/darkGrey"
+				app:srcCompat="@drawable/ic_baseline_add_242"
+				android:id="@+id/floatingActionButtonItem" tools:ignore="RelativeOverlap"/>
+	</RelativeLayout>
+
+</RelativeLayout>

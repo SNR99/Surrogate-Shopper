@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+				android:layout_width="match_parent"
+				android:layout_height="match_parent"
+				android:padding="20dp">
+	<EditText android:textColorHint="@color/darkGrey" android:textColor="@color/darkGrey" android:textSize="20dp"
+			  android:layout_marginVertical="10dp" android:hint="Item Name" android:id="@+id/edit_item"
+			  android:layout_width="match_parent"
+			  android:layout_height="wrap_content"/>
+	<TextView android:layout_below="@id/edit_item" android:id="@+id/quanHeader" android:gravity="center"
+			  android:layout_width="match_parent"
+			  android:textColor="@color/darkGrey"
+			  android:paddingVertical="10dp"
+			  android:textSize="20dp"
+			  android:layout_height="wrap_content" android:text="Quanity"/>
+
+	<LinearLayout android:gravity="center" android:layout_below="@id/quanHeader" android:id="@+id/Counter"
+				  android:layout_width="match_parent"
+				  android:layout_height="wrap_content"
+				  android:padding="20dp"
+				  android:orientation="horizontal">
+		<Button android:background="@color/darkGrey"
+				android:id="@+id/decrease"
+				android:textColor="@android:color/white"
+
+				android:textSize="30dp" android:layout_width="50dp" android:text="-"
+				android:layout_height="wrap_content"/>
+		<TextView android:textColor="@color/darkGrey" android:paddingHorizontal="30dp" android:textSize="30dp"
+				  android:text="1"
+				  android:id="@+id/counterView"
+				  android:layout_width="wrap_content" android:layout_height="wrap_content"/>
+		<Button android:background="@color/darkGrey"
+				android:textSize="30dp" android:layout_width="50dp" android:text="+"
+				android:textColor="@android:color/white"
+				android:id="@+id/increase"
+
+
+				android:layout_height="wrap_content"/>
+
+
+	</LinearLayout>
+	<Button android:layout_centerHorizontal="true" android:id="@+id/add_item_btn"
+			android:layout_width="match_parent"
+			android:layout_below="@id/Counter"
+			android:background="@drawable/rounded_button1"
+
+			android:textColor="@android:color/white"
+			android:text="add"
+			android:layout_height="wrap_content"/>
+</RelativeLayout>
