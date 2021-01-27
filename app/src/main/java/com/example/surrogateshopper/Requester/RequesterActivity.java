@@ -66,13 +66,12 @@ public class RequesterActivity extends AppCompatActivity
       fragmentTransaction.replace(R.id.container_frag, new RequesterFragment()).commit();
     }
 
-    /*
     if (item.getItemId() == R.id.reqProfile) {
       fragmentManager = getSupportFragmentManager();
       fragmentTransaction = fragmentManager.beginTransaction();
       fragmentTransaction.replace(R.id.container_frag, new RequesterProfile());
       fragmentTransaction.commit();
-    }*/
+    }
 
     if (item.getItemId() == R.id.reqBasket) {
       fragmentManager = getSupportFragmentManager();

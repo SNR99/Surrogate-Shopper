@@ -169,9 +169,9 @@ public class VolunteerFragment extends Fragment {
         basketDateArray.add(basket_date);
         basketIDArray.add(basket_id);
         availableItemAdapter.notifyDataSetChanged();
-        mainLayout.setVisibility(View.VISIBLE);
-        loaderLayout.setVisibility(View.GONE);
       }
     }
+    mainLayout.setVisibility(View.VISIBLE);
+    loaderLayout.setVisibility(View.GONE);
   }
 }

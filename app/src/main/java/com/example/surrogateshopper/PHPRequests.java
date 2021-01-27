@@ -13,7 +13,9 @@ import java.util.ArrayList;
 import java.util.Objects;
 
 public class PHPRequests {
-  private final String baseUrl = "https://0cd7cabbcbfa.ngrok.io/";
+  private final String baseUrl = "https://lamp.ms.wits.ac.za/home/s1816904/project/";
+  // final String baseUrl = "https://f99e89fbd093.ngrok.io/";
+
   private final OkHttpClient client = new OkHttpClient();
 
   public void get_my_comments(Activity activity, String basket_id, RequestHandler r) {
@@ -390,6 +392,37 @@ public class PHPRequests {
             });
   }
 
+  public void get_my_address(Activity activity, String user_id, RequestHandler r) {
+    RequestBody user = new FormBody.Builder().add("user_id", user_id).build();
+    final String loginUrl = baseUrl + "get_my_address.php";
+    Request loginRequest = new Request.Builder().url(loginUrl).post(user).build();
+
+    client
+        .newCall(loginRequest)
+        .enqueue(
+            new Callback() {
+              @Override
+              public void onResponse(@NotNull Call call, @NotNull Response response)
+                  throws IOException {
+                if (response.isSuccessful()) {
+
+                  String myRes = Objects.requireNonNull(response.body()).string();
+                  activity.runOnUiThread(
+                      () -> {
+                        try {
+                          r.processResponse(myRes);
+                        } catch (JSONException e) {
+                          e.printStackTrace();
+                        }
+                      });
+                }
+              }
+
+              @Override
+              public void onFailure(@NotNull Call call, @NotNull IOException e) {}
+            });
+  }
+
   public void get_vol_comments(Activity activity, String user_id, RequestHandler r) {
     RequestBody user = new FormBody.Builder().add("user_id", user_id).build();
     final String loginUrl = baseUrl + "get_vol_comments.php";
@@ -424,6 +457,75 @@ public class PHPRequests {
   public void get_vol_basket(FragmentActivity activity, String user_id, RequestHandler r) {
     RequestBody user = new FormBody.Builder().add("user_id", user_id).build();
     final String loginUrl = baseUrl + "get_vol_basket.php";
+    Request loginRequest = new Request.Builder().url(loginUrl).post(user).build();
+
+    client
+        .newCall(loginRequest)
+        .enqueue(
+            new Callback() {
+              @Override
+              public void onResponse(@NotNull Call call, @NotNull Response response)
+                  throws IOException {
+                if (response.isSuccessful()) {
+
+                  String myRes = Objects.requireNonNull(response.body()).string();
+                  activity.runOnUiThread(
+                      () -> {
+                        try {
+                          r.processResponse(myRes);
+                        } catch (JSONException e) {
+                          e.printStackTrace();
+                        }
+                      });
+                }
+              }
+
+              @Override
+              public void onFailure(@NotNull Call call, @NotNull IOException e) {}
+            });
+  }
+
+  public void add_address(
+          Activity activity, String user_id, String latitude1, String longitude1, RequestHandler r) {
+    RequestBody user =
+        new FormBody.Builder()
+            .add("user_id", user_id)
+            .add("latitude", latitude1)
+            .add("longitude", longitude1)
+            .build();
+    final String loginUrl = baseUrl + "add_address.php";
+    Request loginRequest = new Request.Builder().url(loginUrl).post(user).build();
+
+    client
+        .newCall(loginRequest)
+        .enqueue(
+            new Callback() {
+              @Override
+              public void onResponse(@NotNull Call call, @NotNull Response response)
+                  throws IOException {
+                if (response.isSuccessful()) {
+
+                  String myRes = Objects.requireNonNull(response.body()).string();
+                  activity.runOnUiThread(
+                      () -> {
+                        try {
+                          r.processResponse(myRes);
+                        } catch (JSONException e) {
+                          e.printStackTrace();
+                        }
+                      });
+                }
+              }
+
+              @Override
+              public void onFailure(@NotNull Call call, @NotNull IOException e) {}
+            });
+  }
+
+  public void get_address(FragmentActivity activity, String addressID, RequestHandler r) {
+    RequestBody user = new FormBody.Builder().add("address_id", addressID).build();
+
+    final String loginUrl = baseUrl + "get_address.php";
     Request loginRequest = new Request.Builder().url(loginUrl).post(user).build();
 
     client
